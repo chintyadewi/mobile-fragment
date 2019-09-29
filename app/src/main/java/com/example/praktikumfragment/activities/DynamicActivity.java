@@ -20,28 +20,24 @@ public class DynamicActivity extends AppCompatActivity {
     }
 
     public void handlerClickLoadRedFragment(View view) {
-        Fragment CheckRedFragment=getSupportFragmentManager().findFragmentByTag("RED_FRAGMENT");
+        Fragment CheckRedFragment=getSupportFragmentManager().findFragmentById(R.id.dynamic_fragment_placeholder);
 
-        if(CheckRedFragment!=null && CheckRedFragment.isVisible()){
-
-        }else{
+        if(CheckRedFragment==null || CheckRedFragment instanceof BlueFragment){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right);
-            fragmentTransaction.replace(R.id.dynamic_fragment_placeholder,new RedFragment(),"RED_FRAGMENT");
+            fragmentTransaction.replace(R.id.dynamic_fragment_placeholder,new RedFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
     }
 
     public void handlerClickLoadBlueFragment(View view) {
-        Fragment CheckBlueFragment=getSupportFragmentManager().findFragmentByTag("BLUE_FRAGMENT");
+        Fragment CheckBlueFragment=getSupportFragmentManager().findFragmentById(R.id.dynamic_fragment_placeholder);
 
-        if(CheckBlueFragment!=null && CheckBlueFragment.isVisible()){
-
-        }else{
+        if(CheckBlueFragment==null || CheckBlueFragment instanceof RedFragment){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,R.anim.exit_from_left,R.anim.enter_from_left,R.anim.exit_from_right);
-            fragmentTransaction.replace(R.id.dynamic_fragment_placeholder,new BlueFragment(),"BLUE_FRAGMENT");
+            fragmentTransaction.replace(R.id.dynamic_fragment_placeholder,new BlueFragment());
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
